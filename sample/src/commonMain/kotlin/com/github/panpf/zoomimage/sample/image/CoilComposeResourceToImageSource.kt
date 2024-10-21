@@ -1,5 +1,6 @@
 package com.github.panpf.zoomimage.sample.image
 
+import coil3.Extras
 import coil3.ImageLoader
 import coil3.PlatformContext
 import com.github.panpf.zoomimage.coil.CoilModelToImageSource
@@ -11,6 +12,7 @@ expect class CoilComposeResourceToImageSource() : CoilModelToImageSource {
     override suspend fun modelToImageSource(
         context: PlatformContext,
         imageLoader: ImageLoader,
-        model: Any
+        model: Any,
+        extras: Extras
     ): ImageSource.Factory?
 }

@@ -16,6 +16,7 @@
 
 package com.github.panpf.zoomimage.coil
 
+import coil3.Extras
 import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.pathSegments
@@ -49,7 +50,8 @@ actual class CoilModelToImageSourceImpl : CoilModelToImageSource {
     actual override suspend fun modelToImageSource(
         context: PlatformContext,
         imageLoader: ImageLoader,
-        model: Any
+        model: Any,
+        extras: Extras
     ): ImageSource.Factory? {
         val uri = when (model) {
             is String -> model.toUri()
@@ -59,7 +61,7 @@ actual class CoilModelToImageSourceImpl : CoilModelToImageSource {
         }
         return when {
             uri != null && (uri.scheme == "http" || uri.scheme == "https") -> {
-                CoilHttpImageSource.Factory(context, imageLoader, model.toString())
+                CoilHttpImageSource.Factory(context, imageLoader, model.toString(), extras)
             }
 
             uri != null && uri.scheme == "content" -> {

@@ -292,7 +292,7 @@ private fun onState(
             coroutineScope.launch {
                 val model = request.data
                 val imageSource = zoomState.modelToImageSources.firstNotNullOfOrNull {
-                    it.modelToImageSource(context, imageLoader, model)
+                    it.modelToImageSource(context, imageLoader, model, request.extras)
                 }
                 if (imageSource == null) {
                     zoomState.subsampling.logger.w { "CoilZoomAsyncImage. Can't use Subsampling, unsupported model='$model'" }

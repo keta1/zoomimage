@@ -1,5 +1,6 @@
 package com.github.panpf.zoomimage.sample.image
 
+import coil3.Extras
 import coil3.ImageLoader
 import coil3.PlatformContext
 import com.github.panpf.sketch.fetch.isComposeResourceUri
@@ -14,7 +15,8 @@ actual class CoilComposeResourceToImageSource : CoilModelToImageSource {
     actual override suspend fun modelToImageSource(
         context: PlatformContext,
         imageLoader: ImageLoader,
-        model: Any
+        model: Any,
+        extras: Extras
     ): ImageSource.Factory? {
         val uri = when (model) {
             is String -> model.toUri()

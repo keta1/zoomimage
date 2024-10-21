@@ -16,6 +16,7 @@
 
 package com.github.panpf.zoomimage.coil
 
+import coil3.Extras
 import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.fetch.SourceFetchResult
@@ -59,7 +60,8 @@ class CoilHttpImageSource(
     class Factory(
         private val context: PlatformContext,
         private val imageLoader: ImageLoader,
-        private val url: String
+        private val url: String,
+        private val extras: Extras
     ) : ImageSource.Factory {
 
         override val key: String = url
@@ -68,7 +70,8 @@ class CoilHttpImageSource(
             val options = Options(
                 context = context,
                 diskCachePolicy = ENABLED,
-                networkCachePolicy = ENABLED
+                networkCachePolicy = ENABLED,
+                extras = extras
             )
             val mappedData = imageLoader.components.map(url, options)
             val fetcher = imageLoader.components.newFetcher(mappedData, options, imageLoader)?.first
